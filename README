@@ -1,13 +1,14 @@
 Type1 Euler Script font patched with \geq and \leq
 
 The story is, when Donald E. Knuth was typesetting Concrete
-Mathematics, he actually used a patch Euler Script font with
-additional two additional symbols called euxm.
+Mathematics, he actually used a patched Euler Script font with
+two additional symbols, named it euxm.
 
-Many people who tried to mimic Concrete Mathematics through,
-especially Concrete Semantics, failed to notice this detail.
+Many people who tried to mimic Concrete Mathematics through LaTeX
+euler.sty, especially Concrete Semantics, were failed to notice this
+detail.
 
-The files in this repo is generated through mf2pt1, and manually
+The files in this repo are generated through mf2pt1, and manually
 edited to match eusm font in ASMFont. So you can replace the eusm font
 with this to resemble the unique \geq and \leq symbol.
 
