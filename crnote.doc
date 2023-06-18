@@ -1,0 +1,265 @@
+% -*- mode:tex -*-
+%<*install>
+\input docstrip.tex
+\keepsilent
+\askforoverwritefalse
+\declarepreamble\gpl
+
+This program is licensed under GPLv3+.
+
+\endpreamble
+\generate{
+  \usepreamble\gpl
+  \file{\jobname.sty}{\from{\jobname.doc}{style}}
+}
+\endbatchfile
+%</install>
+%<*style>
+%%% ====================================================================
+%%% @AMSTeX-style-file{
+%%%   filename  = "crnote.sty",
+\def\filename{crnote.sty}
+%%%   version   = "1.1",
+\def\fileversion{1.1}
+%%%   date      = "2023/06/18",
+\def\filedate{2023/06/18}
+%%%   author    = "LdBeth",
+%%%   copyright = "Copyright 2023 LdBeth,
+%%%                all rights reserved."
+%%%   email     = "ldbeth@sdf.org",
+%%%   codetable = "ISO/ASCII",
+%%%   supported = "yes",
+%%%   keywords  = "amstex, ams-tex, tex",
+%%%   abstract  = "This file is a documentstyle for use with
+%%%                AMS-TeX 2.2. It simulates the style used
+%%%                in Concrete Mathematics thus by the name.",
+%%% }
+%%% ====================================================================
+%
+%  Some special hacks for style file
+\expandafter\ifx\csname crnote.sty\endcsname\endinput
+  \expandafter\def\csname crnote.sty\endcsname{1.1 (2023/06/18)}\fi
+%
+%  Define the file version consistency if has been loaded multiple
+%  times.
+\xdef\fileversiontest{\fileversion\space(\filedate)}
+\expandafter\ifx\csname\filename\endcsname\fileversiontest
+%
+%  Early exit here
+%
+  \message{[already loaded]}\endinput\fi
+%
+%  Check version inconsistency
+%
+\expandafter\ifx\csname\filename\endcsname\relax % file not yet loaded
+  \else\errmessage{Discrepancy in `\filename' file versions:
+     version \csname\filename\endcsname\space already loaded, trying
+     now to load version \fileversiontest}\fi
+%
+%  Save catcode in a variable named after filename
+%
+\expandafter\xdef\csname\filename\endcsname{%
+  \catcode`\noexpand\@=\the\catcode`\@
+  \expandafter\gdef\csname\filename\endcsname{%
+     \fileversion\space(\filedate)}}
+%
+%  Now, enter namespace
+%
+\catcode`\@=11
+%  Make some noise
+\message{version \fileversion\space(\filedate):}
+%
+%  Setup styname
+%
+\expandafter\ifx\csname styname\endcsname\relax
+  \def\styname{CRNOTE}\def\styversion{1.1}
+\fi
+%
+% Setup font, besides the fonts shipped with AMS-TeX,
+% package ecc, cm-super, eulerpx and the custom euex are used.
+\font@\tenrm=eorm10  \font@\sevenrm=eorm7 \font@\fiverm=eorm5
+\font@\tensl=eosl10  \font@\sevensl=eosl7 \font@\fivesl=eosl5
+\font@\teni=eurm10 \font@\seveni=eurm7 \font@\fivei=eurm5
+\font@\tenex=zeuex10
+\font@\tensmc=eocc10
+\font@\tenit=eoti10
+\font@\eightpoint=eosl8
+%
+\textfont0=\tenrm \scriptfont0=\sevenrm \scriptscriptfont0=\fiverm
+\textfont1=\teni  \scriptfont1=\seveni  \scriptscriptfont1=\fivei
+\textfont2=\tensy \scriptfont2=\sevensy \scriptscriptfont2=\fivesy
+\textfont3=\tenex \scriptfont3=\tenex \scriptscriptfont3=\tenex
+%
+% Select font for math digits, which is from the italic Euler font.
+\mathcode`0="7130
+\mathcode`1="7131
+\mathcode`2="7132
+\mathcode`3="7133
+\mathcode`4="7134
+\mathcode`5="7135
+\mathcode`6="7136
+\mathcode`7="7137
+\mathcode`8="7138
+\mathcode`9="7139
+%
+% Small Caps
+\textonlyfont@\smc\tensmc
+% Also, old style digits
+\font\tensym@=torm10
+\let\oldsty\tensym@
+%
+% Frankfurt and symbol fonts
+%
+\font\tenfm=eufm10 \font\sevenfm=eufm7 \font\fivefm=eufm5
+\font\tenes=euxm10
+%
+%  Assign Euler Symbol font
+%
+\alloc@@8\fam\chardef\sixt@@n\esfam
+\edef\esfam@{\hexnumber@\esfam}
+\textfont\esfam=\tenes
+%
+%  Most of the symbols used in Concrete Mathematics
+%  are from the Euler Frankfurt font.
+%
+\alloc@@8\fam\chardef\sixt@@n\frakfam
+\edef\frakfam@{\hexnumber@\frakfam}
+\textfont\frakfam=\tenfm \scriptfont\frakfam=\sevenfm
+\scriptscriptfont\frakfam=\fivefm
+% Now assign the symbol fonts
+\mathcode`\(="4\frakfam@28
+\mathcode`\)="5\frakfam@29
+\mathcode`+="2\frakfam@2B
+\mathcode`-="2\frakfam@2D
+\mathcode`=="3\frakfam@3D
+\mathcode`!="0\frakfam@21
+\mathcode`[="4\frakfam@5B \delcode`[="\frakfam@5B302
+\mathcode`]="5\frakfam@5D \delcode`]="\frakfam@5D303
+\mathcode`"="0\frakfam@7D
+\mathcode`&="0\frakfam@26
+\mathcode`:="3\frakfam@3A
+\mathcode`;="6\frakfam@3B
+\mathcode`^="0\frakfam@5E
+\mathcode``="0\frakfam@12
+%\mathcode`\{="4\esfam@66
+%\mathcode`\}="5\esfam@67
+\mathcode`\|="0\esfam@6A
+\mathcode`\^^D="2\esfam@5E
+\mathcode`\^^E="0\esfam@3A
+\mathcode`\^^_="2\esfam@5F
+% from zeuex10
+\mathchardef\infty="0399
+% \le and \ge are intentionally kept unchanged
+\mathchardef\leq="3\esfam@14
+\mathchardef\geq="3\esfam@15
+% TODO: \Relbar might need to be fixed
+\mathchardef\Gamma="7100
+\mathchardef\Delta="7101
+\mathchardef\Theta="7102
+\mathchardef\Lambda="7103
+\mathchardef\Xi="7104
+\mathchardef\Pi="7105
+\mathchardef\Sigma="7106
+\mathchardef\Upsilon="7107
+\mathchardef\Phi="7108
+\mathchardef\Psi="7109
+\mathchardef\Omega="710A
+\def\vert{\delimiter"0\esfam@6A30C }
+\def\rbrace{\delimiter"5\esfam@67309 } \let\}=\rbrace
+\def\lbrace{\delimiter"4\esfam@66308 } \let\{=\lbrace
+%\chardef\{="7B
+%\chardef\}="7D
+%
+% Choose the correct bar font
+%
+\makeacc@\bar{009}
+% I need this for signal system
+\def\sinc{\qopname@{sinc}}
+%
+% Adapted from AMSPPT style
+\def\footmarkform@#1{$\m@th^{#1}$}
+\let\thefootnotemark\footmarkform@
+\def\makefootnote@#1#2{\insert\footins
+ {\interlinepenalty\interfootnotelinepenalty
+ \eightpoint\splittopskip\ht\strutbox\splitmaxdepth\dp\strutbox
+ \floatingpenalty\@MM\leftskip\z@skip\rightskip\z@skip
+ \spaceskip\z@skip\xspaceskip\z@skip
+ \leavevmode{#1}\footstrut\ignorespaces#2\unskip\lower\dp\strutbox
+ \vbox to\dp\strutbox{}}}
+\newcount\footmarkcount@
+\footmarkcount@\z@
+\def\footnotemark{\let\@sf\empty@\relaxnext@
+ \ifhmode\edef\@sf{\spacefactor\the\spacefactor}\/\fi
+ \DN@{\ifx[\next\let\next@\nextii@\else
+  \ifx"\next\let\next@\nextiii@\else
+  \let\next@\nextiv@\fi\fi\next@}%
+ \DNii@[##1]{\footmarkform@{##1}\@sf}%
+ \def\nextiii@"##1"{{##1}\@sf}%
+ \def\nextiv@{\iffirstchoice@\global\advance\footmarkcount@\@ne\fi
+  \footmarkform@{\number\footmarkcount@}\@sf}%
+ \FN@\next@}
+\def\footnotetext{\relaxnext@
+ \DN@{\ifx[\next\let\next@\nextii@\else
+  \ifx"\next\let\next@\nextiii@\else
+  \let\next@\nextiv@\fi\fi\next@}%
+ \DNii@[##1]##2{\makefootnote@{\footmarkform@{##1}}{##2}}%
+ \def\nextiii@"##1"##2{\makefootnote@{##1}{##2}}%
+ \def\nextiv@##1{\makefootnote@{\footmarkform@%
+  {\number\footmarkcount@}}{##1}}%
+ \FN@\next@}
+\def\footnote{\let\@sf\empty@\relaxnext@
+ \ifhmode\edef\@sf{\spacefactor\the\spacefactor}\/\fi
+ \DN@{\ifx[\next\let\next@\nextii@\else
+  \ifx"\next\let\next@\nextiii@\else
+  \let\next@\nextiv@\fi\fi\next@}%
+ \DNii@[##1]##2{\footnotemark[##1]\footnotetext[##1]{##2}}%
+ \def\nextiii@"##1"##2{\footnotemark"##1"\footnotetext"##1"{##2}}%
+ \def\nextiv@##1{\footnotemark\footnotetext{##1}}%
+ \FN@\next@}
+\def\adjustfootnotemark#1{\advance\footmarkcount@#1\relax}
+\def\footnoterule{\kern-4\p@
+  \hrule width5pc\kern 3.6\p@}
+%
+% Make a framed box
+\def\frameit{\setboxz@h\bgroup}
+\def\endframeit{\egroup\dimen@.4\ex@
+ \advance\dimen@3\ex@\advance\dimen@\dp\z@
+ \hbox{\lower\dimen@\hbox{%
+ \vbox{\hrule height.4\ex@
+ \hbox{\vrule width.4\ex@\hskip3\ex@\vbox{\vskip3\ex@\boxz@\vskip3\ex@}%
+ \hskip3\ex@\vrule width.4\ex@}\hrule height.4\ex@}%
+ }}}
+%
+% A special reverse indent mode is applied
+\parindent=0pt
+\hangafter=1
+\parskip=3pt minus 1pt
+\everypar={\hangindent1em}
+%
+% Prelude setup
+\def\topmatter{\let\topmatter\relax}
+%
+\newbox\titlebox@
+\newbox\authorbox@
+\def\title#1\endtitle{
+    \global\setbox\titlebox@\vtop{\tenbf\uppercase{#1}}%
+  }
+\def\author#1\endauthor{
+    \global\setbox\authorbox@\vtop{\tenit{#1}}%
+  }
+\outer\def\endtopmatter{
+\ifvoid\titlebox@\else\unvbox\titlebox@\vskip0.2in\fi
+\ifvoid\authorbox@\else\unvbox\authorbox@\vskip0.2in\fi
+}
+\def\document{%
+\let\fontlist@\relax\let\alloclist@\relax
+\tenrm
+}
+%
+%    Write an empty line on screen to tidy up:
+\W@{}
+%    Restore catcode
+\csname crnote.sty\endcsname
+\endinput
+%</style>
+%\Finale
